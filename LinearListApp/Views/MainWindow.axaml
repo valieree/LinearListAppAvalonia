@@ -1,0 +1,30 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:LinearListApp.ViewModels"
+        Title="Линейный список"
+        Width="400"
+        Height="400"
+        x:Class="LinearListApp.Views.MainWindow"
+        x:DataType="vm:LinearListViewModel">
+	<Window.DataContext>
+		<vm:LinearListViewModel/>
+	</Window.DataContext>
+
+	<StackPanel Margin="10">
+		<TextBlock Text="Добавьте элемент в список:"/>
+		<TextBox Name="ItemInput" Watermark="Введите элемент"/>
+		<Button Content="Добавить" Command="{Binding AddItem}" CommandParameter="{Binding Text, ElementName=ItemInput}"/>
+		<TextBlock Text="Текущий элемент:" Margin="0,10,0,0"/>
+		<TextBlock Text="{Binding CurrentItem}" FontWeight="Bold"/>
+
+		<Button Content="Удалить текущий" Command="{Binding RemoveItem}" CommandParameter="{Binding CurrentItem}"/>
+		<Button Content="Следующий" Command="{Binding MoveNext}"/>
+		<Button Content="Вернуться в начало" Command="{Binding Reset}"/>
+		<Button Content="Очистить список" Command="{Binding ClearList}"/>
+
+		<TextBlock Text="Список элементов:" Margin="0,10,0,0"/>
+		<ListBox ItemsSource ="{Binding Items}"/>
+
+		<TextBlock Text="{Binding Status}" Margin="10,5,0,0"/>
+	</StackPanel>
+</Window>
